@@ -73,7 +73,7 @@ model TEXT,
 CONSTRAINT fk_machine
     FOREIGN KEY (model)
     REFERENCES Machine(model)
-);
+PRIMARY KEY(serialNumber, model));
 
 CREATE TABLE Reservation(
 reservation_ID INT NOT NULL PRIMARY KEY,
@@ -95,9 +95,9 @@ serial_number INT,
 model TEXT,
 startdate DATE,
 enddate DATE,
-CONSTRAINT fk_machine
+CONSTRAINT fk_machine_number
     FOREIGN KEY (serial_number, model)
-    REFERENCES Machine(serialNumber, model)
+    REFERENCES Machine_number(serialNumber, model)
 PRIMARY KEY(serial_number, model, startdate)
 );
 
