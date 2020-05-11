@@ -26,6 +26,7 @@ name TEXT);
 
 CREATE TABLE Project(
 project_ID INT NOT NULL PRIMARY KEY,
+main_project INT,
 company_ID INT,
 customer TEXT,
 location TEXT,
@@ -51,13 +52,19 @@ CONSTRAINT fk_project
 PRIMARY KEY(SSID, startdate));
 
 CREATE TABLE Machine(
-serialNumber INT NOT NULL,
-model TEXT,
+model TEXT PRIMARY KEY,
 description TEXT,
 manufacturer TEXT,
 size TEXT,
-fuel_consumption,
-PRIMARY KEY (serialNumber, model));
+fuel_consumption TEXT);
+
+CREATE TABLE Machine_number(
+serialNumber INT NOT NULL,
+model TEXT,
+CONSTRAINT fk_machine
+    FOREIGN KEY (model)
+    REFERENCES Machine(model)
+);
 
 CREATE TABLE Reservation(
 reservation_ID INT NOT NULL PRIMARY KEY,
@@ -69,9 +76,9 @@ enddate DATE,
 CONSTRAINT fk_project
     FOREIGN KEY (project)
     REFERENCES Project(project_ID)
-CONSTRAINT fk_machine
+CONSTRAINT fk_machine_number
     FOREIGN KEY (serial_number, model)
-    REFERENCES Machine(serialNumber, model)
+    REFERENCES Machine_number(serialNumber, model)
 );
 
 CREATE TABLE Out_of_use(
@@ -108,10 +115,14 @@ CONSTRAINT fk_qualification
     REFERENCES Qualification(type)
 PRIMARY KEY(project_ID, type));
 
-CREATE TABLE Project_manager(
-subproject_ID INT NOT NULL PRIMARY KEY,
-mainproject_ID INT,
+CREATE TABLE Required_Machines(
+project_ID INT NOT NULL,
+model TEXT,
+amount INT,
 CONSTRAINT fk_project
-    FOREIGN KEY (mainproject_ID)
+    FOREIGN KEY (project_ID)
     REFERENCES Project(project_ID)
-);
+CONSTRAINT fk_machine
+    FOREIGN KEY (model)
+    REFERENCES Machine(model)
+PRIMARY KEY (project_ID, model));
