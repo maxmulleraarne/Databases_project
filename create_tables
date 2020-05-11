@@ -8,7 +8,7 @@ CREATE TABLE Qualification(
 type TEXT PRIMARY KEY,
 description TEXT);
 
-CREATE TABLE Has_qualifcation(
+CREATE TABLE Has_qualification(
 SSID INT NOT NULL,
 type TEXT,
 CONSTRAINT fk_employee
