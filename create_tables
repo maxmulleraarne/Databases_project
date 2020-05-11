@@ -33,7 +33,6 @@ customer TEXT,
 location TEXT,
 startdate DATE,
 enddate DATE,
-requirement_ID,
 CONSTRAINT fk_company
     FOREIGN KEY (company_ID)
     REFERENCES Company(company_ID)
