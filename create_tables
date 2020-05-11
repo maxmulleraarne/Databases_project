@@ -28,6 +28,7 @@ CREATE TABLE Project(
 project_ID INT NOT NULL PRIMARY KEY,
 main_project INT,
 company_ID INT,
+description TEXT,
 customer TEXT,
 location TEXT,
 startdate DATE,
@@ -53,10 +54,15 @@ PRIMARY KEY(SSID, startdate));
 
 CREATE TABLE Machine(
 model TEXT PRIMARY KEY,
+company_ID INT,
 description TEXT,
 manufacturer TEXT,
 size TEXT,
-fuel_consumption TEXT);
+fuel_consumption TEXT,
+CONSTRAINT fk_company
+    FOREIGN KEY (company_ID)
+    REFERENCES Company(company_ID)
+);
 
 CREATE TABLE Machine_number(
 serialNumber INT NOT NULL,
