@@ -1,0 +1,117 @@
+CREATE TABLE Employee(
+SSID INT NOT NULL PRIMARY KEY,
+position TEXT,
+name TEXT,
+company_ID INT);
+
+CREATE TABLE Qualification(
+type TEXT PRIMARY KEY,
+description TEXT);
+
+CREATE TABLE Has_qualifcation(
+SSID INT NOT NULL,
+type TEXT,
+CONSTRAINT fk_employee
+    FOREIGN KEY (SSID)
+    REFERENCES Employee(SSID)
+CONSTRAINT fk_qualification
+    FOREIGN KEY (type)
+    REFERENCES Qualification(type)
+PRIMARY KEY (SSID, type));
+
+CREATE TABLE Company(
+company_ID INT NOT NULL PRIMARY KEY,
+address TEXT,
+name TEXT);
+
+CREATE TABLE Project(
+project_ID INT NOT NULL PRIMARY KEY,
+company_ID INT,
+customer TEXT,
+location TEXT,
+startdate DATE,
+enddate DATE,
+requirement_ID,
+CONSTRAINT fk_company
+    FOREIGN KEY (company_ID)
+    REFERENCES Company(company_ID)
+);
+
+CREATE TABLE Absent(
+SSID INT NOT NULL,
+startdate DATE,
+enddate DATE,
+sub_ID INT,
+CONSTRAINT fk_employee
+    FOREIGN KEY (SSID)
+    REFERENCES Employee(SSID)
+CONSTRAINT fk_project
+    FOREIGN KEY (startdate)
+    REFERENCES Project(startdate)
+PRIMARY KEY(SSID, startdate));
+
+CREATE TABLE Machine(
+serialNumber INT NOT NULL,
+model TEXT,
+description TEXT,
+manufacturer TEXT,
+size TEXT,
+fuel_consumption,
+PRIMARY KEY (serialNumber, model));
+
+CREATE TABLE Reservation(
+reservation_ID INT NOT NULL PRIMARY KEY,
+project INT,
+serial_number INT,
+model TEXT,
+startdate DATE,
+enddate DATE,
+CONSTRAINT fk_project
+    FOREIGN KEY (project)
+    REFERENCES Project(project_ID)
+CONSTRAINT fk_machine
+    FOREIGN KEY (serial_number, model)
+    REFERENCES Machine(serialNumber, model)
+);
+
+CREATE TABLE Out_of_use(
+serial_number INT,
+model TEXT,
+startdate DATE,
+enddate DATE,
+CONSTRAINT fk_machine
+    FOREIGN KEY (serial_number, model)
+    REFERENCES Machine(serialNumber, model)
+PRIMARY KEY(serial_number, model, startdate)
+);
+
+CREATE TABLE Assignment(
+project_ID INT NOT NULL,
+SSID INT NOT NULL,
+CONSTRAINT fk_project
+    FOREIGN KEY (project_ID)
+    REFERENCES Project(project_ID)
+CONSTRAINT fk_employee
+    FOREIGN KEY (SSID)
+    REFERENCES Employee(SSID)
+PRIMARY KEY (project_ID, SSID));
+
+CREATE TABLE Required(
+project_ID INT,
+type TEXT,
+amount INT,
+CONSTRAINT fk_project
+    FOREIGN KEY (project_ID)
+    REFERENCES Project(project_ID)
+CONSTRAINT fk_qualification
+    FOREIGN KEY (type)
+    REFERENCES Qualification(type)
+PRIMARY KEY(project_ID, type));
+
+CREATE TABLE Project_manager(
+subproject_ID INT NOT NULL PRIMARY KEY,
+mainproject_ID INT,
+CONSTRAINT fk_project
+    FOREIGN KEY (mainproject_ID)
+    REFERENCES Project(project_ID)
+);
