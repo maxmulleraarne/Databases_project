@@ -26,5 +26,18 @@ INSERT INTO Has_qualification
 Values(445, "Machine operation");
 
 INSERT INTO Machine
-Values(111, "E-001", "Large excavator, useful for moving large amounts of land", "Hitachi", "Large", "15")
+Values("E-001", "Large excavator, useful for moving large amounts of land", "Hitachi", "L", "15", 123);
+
+INSERT INTO Machine
+Values("H-001", "Construction site hammer", "Fiskars", "M", "0", 123);
+
+INSERT INTO Machine_number
+VALUES(111, "E-001");
+
+INSERT INTO Machine_number
+VALUES(112, "E-001");
+
+INSERT INTO Machine_number
+VALUES(200, "H-001");
+
 
