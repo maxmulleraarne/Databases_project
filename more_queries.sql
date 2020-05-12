@@ -17,6 +17,10 @@ SELECT model
 FROM Machine, Company
 WHERE Machine.company_ID=Company.company_ID AND Company.name='Work bois';
 
+--Finds all machines which are manufactured by pied piper
+SELECT *
+FROM Machine
+WHERE manufacturer='Pied Piper'
 --Query to find all the employees assigned to project 666
 SELECT Employee.name
 FROM Employee, Assignment
