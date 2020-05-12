@@ -174,3 +174,12 @@ VALUES(400, 706, "2020-08-18", "2020-08-25", 401);
 -- Assign Boris to his position
 INSERT INTO Assignment
 VALUES(706, 401);
+
+
+-- Now let's test our key constraints.
+
+-- Obviously we can't add employees to a non-existing company
+INSERT INTO Employee
+Values(404, "Tester", "E. Rror", 111);
+-- FOREIGN key constraint failed
+
