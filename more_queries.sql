@@ -1,27 +1,33 @@
+--Query to find the description to the given qualification
 SELECT *
 FROM Qualification
 WHERE type='Machine operation';
-
+--Check the qualifications of an employee "400"
 SELECT type
 FROM has_qualification
 WHERE SSID=400;
 
+--Checks all the projects contracted to a company
 SELECT project_ID, Project.description
 FROM Company, Project
 WHERE Company.name='Work bois';
 
+--Query to search all the company's machines
 SELECT model
 FROM Machine, Company
 WHERE Machine.company_ID=Company.company_ID AND Company.name='Work bois';
 
+--Query to find all the employees assigned to project 666
 SELECT Employee.name
 FROM Employee, Assignment
 WHERE Employee.SSID=Assignment.SSID AND project.id=666;
 
+--Query to search all the employees not in an assignment
 SELECT Employee.name
 FROM Employee
 WHERE Employee.SSID NOT IN (SELECT SSID FROM Assignment);
 
+--Counts the amount of employees who are employed by the company 123
 SELECT COUNT(SSID)
 FROM  Employee
 WHERE company_ID=123;
