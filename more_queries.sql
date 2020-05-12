@@ -21,6 +21,7 @@ WHERE Machine.company_ID=Company.company_ID AND Company.name='Work bois';
 SELECT Employee.name
 FROM Employee, Assignment
 WHERE Employee.SSID=Assignment.SSID AND project.id=666;
+-- This fails due to the fact that there is no project with given id
 
 --Finds all the companies with 0 employees
 SELECT company_ID, name
@@ -72,3 +73,5 @@ FROM Required_machines
 WHERE project_ID = 706
 ) AS R 
 ON Machine.model = R.model;
+
+
