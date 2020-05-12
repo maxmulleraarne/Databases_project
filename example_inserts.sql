@@ -2,7 +2,7 @@
 INSERT INTO Company
 Values(123, "Moonlight avenue 14", "Work bois");
 
--- Add three employees
+-- Add four employees
 INSERT INTO Employee
 Values(400, "Main work man", "Joe Jobs", 123);
 
@@ -11,6 +11,9 @@ Values(401, "CEO", "Boris Bronco", 123);
 
 INSERT INTO Employee
 Values(402, "Plumber specialist", "Mark Lumber", 123);
+
+INSERT INTO Employee
+Values(403, "Secretary", "Julia Matthews", 123);
 
 -- Add 4 qualifications
 INSERT INTO Qualification
@@ -41,12 +44,15 @@ Values(401, "Electical installation");
 INSERT INTO Has_qualification
 Values(402, "Plumbing skills");
 
+INSERT INTO Has_qualification
+Values(403, "Excel skills");
+
 -- Add three different machine types
 INSERT INTO Machine
 Values("E-001", 123, "Large excavator, useful for moving large amounts of land", "Hitachi", "L", 15);
 
 INSERT INTO Machine
-Values("H-001", 123, "Construction site hammer", "Fiskars", "M", 0);
+Values("H-001", 123, "Construction site machine hammer", "Fiskars", "M", 2);
 
 INSERT INTO Machine
 Values("P-15", 123, "General pipe connector", "Pied Piper", "M", 8);
@@ -122,3 +128,49 @@ VALUES(1, "E-001", "2020-06-12", "2020-06-20");
 
 INSERT INTO Reservation
 VALUES(802, 702, 2, "E-001", "2020-06-12", "2020-06-20");
+
+-- Now we have used every other table in out system except Absent
+-- Everything is working well so far
+
+-- Let's add a second project with an absense
+INSERT INTO Project
+VALUES(704, 704, 123, "Demolition of an old storage building.", "John Johnson", "Klarinettipolku 3, Helsinki", "2020-08-10", "2020-08-25");
+
+INSERT INTO Project
+VALUES(705, 704, 123, "Paperwork for demolition.", "John Johnson", "Moonlight avenue 14", "2020-08-10", "2020-08-12");
+
+INSERT INTO Project
+VALUES(706, 704, 123, "Actual demolition process.", "John Johnson", "Klarinettipolku 3, Helsinki", "2020-08-13", "2020-08-25");
+
+-- Reserve Excavator and hammer for demolition
+INSERT INTO Required_Machines
+VALUES(706, "E-001", 1);
+INSERT INTO Required_Machines
+VALUES(706, "H-001", 1);
+
+-- Requirements for someone to know excel for paperwork and machine operation for demolition
+INSERT INTO Required
+VALUES(705, "Excel skills", 1);
+INSERT INTO Required
+VALUES(706, "Machine operation", 1);
+
+-- Assign employees with proper qualifiations
+INSERT INTO Assignment
+VALUES(705, 401);
+INSERT INTO Assignment
+VALUES(706, 400);
+
+-- Reserve excavator for a week
+INSERT INTO Reservation
+VALUES(804, 706, 1, "E-001", "2020-08-13", "2020-08-20");
+-- Reserve hammer for the whole duration
+INSERT INTO Reservation
+VALUES(805, 706, 1, "H-001", "2020-08-13", "2020-08-25");
+
+-- Absense of Joe
+INSERT INTO Absent
+VALUES(400, 706, "2020-08-18", "2020-08-25", 401);
+
+-- Assign Boris to his position
+INSERT INTO Assignment
+VALUES(706, 401);

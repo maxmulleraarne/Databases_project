@@ -44,6 +44,7 @@ CONSTRAINT fk_company
 
 CREATE TABLE Absent(
 SSID INT NOT NULL,
+project_ID INT NOT NULL,
 startdate DATE,
 enddate DATE,
 sub_ID INT,
@@ -51,8 +52,8 @@ CONSTRAINT fk_employee
     FOREIGN KEY (SSID)
     REFERENCES Employee(SSID)
 CONSTRAINT fk_project
-    FOREIGN KEY (startdate)
-    REFERENCES Project(startdate)
+    FOREIGN KEY (project_ID)
+    REFERENCES Project(project_ID)
 PRIMARY KEY(SSID, startdate));
 
 CREATE TABLE Machine(
