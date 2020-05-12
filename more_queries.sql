@@ -10,7 +10,7 @@ WHERE SSID=400;
 --Checks all the projects contracted to a company
 SELECT project_ID, Project.description
 FROM Company, Project
-WHERE Company.name='Work bois';
+WHERE Company.name='Work bois' AND Project.company_ID=Company.Company_ID;
 
 --Query to search all the company's machines
 SELECT model
@@ -21,6 +21,16 @@ WHERE Machine.company_ID=Company.company_ID AND Company.name='Work bois';
 SELECT Employee.name
 FROM Employee, Assignment
 WHERE Employee.SSID=Assignment.SSID AND project.id=666;
+
+--Finds all the companies with 0 employees
+SELECT company_ID, name
+FROM Company
+WHERE company_ID NOT IN (SELECT company_ID FROM Employee);
+
+--Finds all projects with the location Espoo
+SELECT project_ID, description
+FROM Project
+WHERE location='Espoo';
 
 --Query to search all the employees not in an assignment
 SELECT Employee.name
