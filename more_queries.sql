@@ -62,3 +62,13 @@ SELECT reservation_ID
 FROM Company, Machine, Machine_number, Reservation
 WHERE Company.company_ID = Machine.company_ID and Machine.model = Machine_number.model
 and Machine_number.model = Reservation.model and Machine_number.serialNumber = Reservation.serial_number;
+
+-- Query to calculate average fuel consumption for machines needed for subproject with ID 706
+SELECT AVG(amount*fuel_consumption) 
+FROM Machine
+JOIN (
+SELECT *
+FROM Required_machines
+WHERE project_ID = 706
+) AS R 
+ON Machine.model = R.model;
