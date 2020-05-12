@@ -26,10 +26,12 @@ SELECT COUNT(SSID)
 FROM  Employee
 WHERE company_ID=123;
 
+--Query to get the free employees for a certain day.
 SELECT DISTINCT Employee.SSID
 FROM Assignment, Project, Employee
 WHERE Employee.SSID = Assignment.SSID AND Assignment.project_ID = Project.project_ID AND (startdate > '2020-06-21' OR enddate < '2020-06-21');
 
+--Query to get the combined amount of qualificated employees needed to complete a project and its sub project.
 SELECT SUM(amount)
 FROM Project, Required
 WHERE Project.project_ID = 700 or Project.main_project = 700;
