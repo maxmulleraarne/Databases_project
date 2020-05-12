@@ -51,3 +51,14 @@ WHERE Employee.SSID = Assignment.SSID AND Assignment.project_ID = Project.projec
 SELECT SUM(amount)
 FROM Project, Required
 WHERE Project.project_ID = 700 or Project.main_project = 700;
+
+--Find all machines that are out of use on a certain day
+SELECT serial_number, model
+FROM Out_of_use
+WHERE startdate < '2020-06-15' or enddate < '2020-06-15';
+
+--Find all reservations for a company
+SELECT reservation_ID
+FROM Company, Machine, Machine_number, Reservation
+WHERE Company.company_ID = Machine.company_ID and Machine.model = Machine_number.model
+and Machine_number.model = Reservation.model and Machine_number.serialNumber = Reservation.serial_number;
