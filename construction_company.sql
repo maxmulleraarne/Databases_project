@@ -405,4 +405,14 @@ WHERE project_ID = 706
 ) AS R 
 ON Machine.model = R.model;
 
-
+-- Create index for when out of use machines are again usable
+CREATE INDEX Out_of_use_INDEX ON Out_of_use(serial_number, enddate);
+             
+-- Create index for employee information
+CREATE INDEX Employee_INDEX ON Employee(SSID, position, name);
+             
+-- A view that collects all employees which have Excel skills qualification
+CREATE VIEW [EXCEL_PROS] AS
+SELECT SSID, name
+FROM Employee, Has_qualification
+WHERE Employee.SSID=Employee.SSID AND type='Excel skills';
